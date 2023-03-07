@@ -100,8 +100,8 @@ keys_file =
     { "f4_move_down_token_occurrence",    "Down", "Control", "Alt" },
     
     // NOTE(rjf): Alternative Movement Keys
-    { "seek_end_of_line",             "End" },
-    { "f4_home_first_non_whitespace", "Home" },
+    { "seek_end_of_line",             "E", "Control" },
+    { "f4_home_first_non_whitespace", "8", "Control" },
     { "page_up",                "PageUp" },
     { "page_down",              "PageDown" },
     { "goto_beginning_of_file", "PageUp", "Control" },
@@ -147,8 +147,8 @@ keys_file =
     { "duplicate_line",              "L", "Control" },
     
     // NOTE(rjf): View
-    { "center_view",                 "E", "Control" },
-    { "left_adjust_view",            "E", "Control", "Shift" },
+    // { "center_view",                 "E", "Control" },
+    // { "left_adjust_view",            "E", "Control", "Shift" },
     
     // NOTE(rjf): File
     { "kill_buffer",                 "K", "Control", "Shift" },
@@ -181,7 +181,13 @@ keys_file =
 
 keys_code =
 {
-    { "write_parentheses",          "5" },
+    // NOTE(jocabin): Custom keybindings
+    { "write_curly",          "4", "Alt" },
+    { "write_parentheses",    "5" },
+    { "write_single_quote",    "4" },
+    { "write_double_quote",    "3" },
+    { "write_array_brackets",    "5", "Alt" },
+
     { "f4_comment_selection",       "Semicolon", "Control" },
     { "f4_uncomment_selection",     "Semicolon", "Control", "Shift", },
     { "f4_autocomplete_or_indent",  "Tab" },

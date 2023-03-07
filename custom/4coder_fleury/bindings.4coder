@@ -181,7 +181,6 @@ keys_file =
 
 keys_code =
 {
-    { "write_curly",                "G", "Alt" },
     { "f4_comment_selection",       "Semicolon", "Control" },
     { "f4_uncomment_selection",     "Semicolon", "Control", "Shift", },
     { "f4_autocomplete_or_indent",  "Tab" },

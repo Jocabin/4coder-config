@@ -40,7 +40,7 @@ mark_thickness = 2;
 lister_roundness = 20;
 
 // Code Wrapping
-treat_as_code = ".cpp.c.hpp.h.cc.cs.java.rs.glsl.m.mm";
+treat_as_code = ".cpp.c.hpp.h.cc.cs.java.rs.glsl.m.mm.html.css.js.ts.svelte.json";
 enable_virtual_whitespace = true;
 virtual_whitespace_regular_indent = 4;
 enable_code_wrapping = true;
@@ -53,7 +53,7 @@ automatically_indent_text_on_save = true;
 automatically_save_changes_on_build = true;
 
 // Load project on startup
-automatically_load_project = false;
+automatically_load_project = true;
 
 // Indentation
 indent_with_tabs = false;

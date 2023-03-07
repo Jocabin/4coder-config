@@ -2,7 +2,7 @@
 #define command_id(c) (fcoder_metacmd_ID_##c)
 #define command_metadata(c) (&fcoder_metacmd_table[command_id(c)])
 #define command_metadata_by_id(id) (&fcoder_metacmd_table[id])
-#define command_one_past_last_id 344
+#define command_one_past_last_id 348
 #if defined(CUSTOM_COMMAND_SIG)
 #define PROC_LINKS(x,y) x
 #else
@@ -343,10 +343,14 @@ CUSTOM_COMMAND_SIG(view_buffer_other_panel);
 CUSTOM_COMMAND_SIG(view_jump_list_with_lister);
 CUSTOM_COMMAND_SIG(word_complete);
 CUSTOM_COMMAND_SIG(word_complete_drop_down);
+CUSTOM_COMMAND_SIG(write_array_brackets);
 CUSTOM_COMMAND_SIG(write_block);
 CUSTOM_COMMAND_SIG(write_curly);
+CUSTOM_COMMAND_SIG(write_double_quote);
 CUSTOM_COMMAND_SIG(write_hack);
 CUSTOM_COMMAND_SIG(write_note);
+CUSTOM_COMMAND_SIG(write_parentheses);
+CUSTOM_COMMAND_SIG(write_single_quote);
 CUSTOM_COMMAND_SIG(write_space);
 CUSTOM_COMMAND_SIG(write_text_and_auto_indent);
 CUSTOM_COMMAND_SIG(write_text_input);
@@ -365,7 +369,7 @@ char *source_name;
 i32 source_name_len;
 i32 line_number;
 };
-static Command_Metadata fcoder_metacmd_table[344] = {
+static Command_Metadata fcoder_metacmd_table[348] = {
 { PROC_LINKS(allow_mouse, 0), false, "allow_mouse", 11, "Shows the mouse and causes all mouse input to be processed normally.", 68, "c:\\4coder\\custom\\4coder_default_framework.cpp", 45, 481 },
 { PROC_LINKS(auto_indent_line_at_cursor, 0), false, "auto_indent_line_at_cursor", 26, "Auto-indents the line on which the cursor sits.", 47, "c:\\4coder\\custom\\4coder_auto_indent.cpp", 39, 420 },
 { PROC_LINKS(auto_indent_range, 0), false, "auto_indent_range", 17, "Auto-indents the range between the cursor and the mark.", 55, "c:\\4coder\\custom\\4coder_auto_indent.cpp", 39, 430 },
@@ -672,10 +676,10 @@ static Command_Metadata fcoder_metacmd_table[344] = {
 { PROC_LINKS(string_repeat, 0), false, "string_repeat", 13, "Example of query_user_string and query_user_number", 50, "c:\\4coder\\custom\\4coder_examples.cpp", 36, 179 },
 { PROC_LINKS(suppress_mouse, 0), false, "suppress_mouse", 14, "Hides the mouse and causes all mosue input (clicks, position, wheel) to be ignored.", 83, "c:\\4coder\\custom\\4coder_default_framework.cpp", 45, 475 },
 { PROC_LINKS(swap_panels, 0), false, "swap_panels", 11, "Swaps the active panel with it's sibling.", 41, "c:\\4coder\\custom\\4coder_base_commands.cpp", 41, 1686 },
-{ PROC_LINKS(switch_to_keybinding_0, 0), false, "switch_to_keybinding_0", 22, "Switch the keybindings to mode 0.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 9 },
-{ PROC_LINKS(switch_to_keybinding_1, 0), false, "switch_to_keybinding_1", 22, "Switch the keybindings to mode 1.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 24 },
-{ PROC_LINKS(switch_to_keybinding_2, 0), false, "switch_to_keybinding_2", 22, "Switch the keybindings to mode 2.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 30 },
-{ PROC_LINKS(switch_to_keybinding_3, 0), false, "switch_to_keybinding_3", 22, "Switch the keybindings to mode 3.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 36 },
+{ PROC_LINKS(switch_to_keybinding_0, 0), false, "switch_to_keybinding_0", 22, "Switch the keybindings to mode 0.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 50 },
+{ PROC_LINKS(switch_to_keybinding_1, 0), false, "switch_to_keybinding_1", 22, "Switch the keybindings to mode 1.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 56 },
+{ PROC_LINKS(switch_to_keybinding_2, 0), false, "switch_to_keybinding_2", 22, "Switch the keybindings to mode 2.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 62 },
+{ PROC_LINKS(switch_to_keybinding_3, 0), false, "switch_to_keybinding_3", 22, "Switch the keybindings to mode 3.", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 68 },
 { PROC_LINKS(theme_lister, 0), true, "theme_lister", 12, "Opens an interactive list of all registered themes.", 51, "c:\\4coder\\custom\\4coder_lists.cpp", 33, 785 },
 { PROC_LINKS(to_lowercase, 0), false, "to_lowercase", 12, "Converts all ascii text in the range between the cursor and the mark to lowercase.", 82, "c:\\4coder\\custom\\4coder_base_commands.cpp", 41, 569 },
 { PROC_LINKS(to_uppercase, 0), false, "to_uppercase", 12, "Converts all ascii text in the range between the cursor and the mark to uppercase.", 82, "c:\\4coder\\custom\\4coder_base_commands.cpp", 41, 556 },
@@ -700,10 +704,14 @@ static Command_Metadata fcoder_metacmd_table[344] = {
 { PROC_LINKS(view_jump_list_with_lister, 0), false, "view_jump_list_with_lister", 26, "When executed on a buffer with jumps, creates a persistent lister for all the jumps", 83, "c:\\4coder\\custom\\4coder_jump_lister.cpp", 39, 59 },
 { PROC_LINKS(word_complete, 0), false, "word_complete", 13, "Iteratively tries completing the word to the left of the cursor with other words in open buffers that have the same prefix string.", 130, "c:\\4coder\\custom\\4coder_search.cpp", 34, 433 },
 { PROC_LINKS(word_complete_drop_down, 0), false, "word_complete_drop_down", 23, "Word complete with drop down menu.", 34, "c:\\4coder\\custom\\4coder_search.cpp", 34, 679 },
+{ PROC_LINKS(write_array_brackets, 0), false, "write_array_brackets", 20, "Write both doubles array brackets", 33, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 42 },
 { PROC_LINKS(write_block, 0), false, "write_block", 11, "At the cursor, insert a block comment.", 38, "c:\\4coder\\custom\\4coder_combined_write_commands.cpp", 51, 94 },
-{ PROC_LINKS(write_curly, 0), false, "write_curly", 11, "Write both curlys", 17, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 15 },
+{ PROC_LINKS(write_curly, 0), false, "write_curly", 11, "Write both curlys", 17, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 10 },
+{ PROC_LINKS(write_double_quote, 0), false, "write_double_quote", 18, "Write both doubles quotes", 25, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 34 },
 { PROC_LINKS(write_hack, 0), false, "write_hack", 10, "At the cursor, insert a '// HACK' comment, includes user name if it was specified in config.4coder.", 99, "c:\\4coder\\custom\\4coder_combined_write_commands.cpp", 51, 82 },
 { PROC_LINKS(write_note, 0), false, "write_note", 10, "At the cursor, insert a '// NOTE' comment, includes user name if it was specified in config.4coder.", 99, "c:\\4coder\\custom\\4coder_combined_write_commands.cpp", 51, 88 },
+{ PROC_LINKS(write_parentheses, 0), false, "write_parentheses", 17, "Write both parentheses", 22, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 18 },
+{ PROC_LINKS(write_single_quote, 0), false, "write_single_quote", 18, "Write both singles quotes", 25, "c:\\4coder\\custom\\4coder_fleury\\4coder_fleury_bindings.cpp", 57, 26 },
 { PROC_LINKS(write_space, 0), false, "write_space", 11, "Inserts a space.", 16, "c:\\4coder\\custom\\4coder_base_commands.cpp", 41, 67 },
 { PROC_LINKS(write_text_and_auto_indent, 0), false, "write_text_and_auto_indent", 26, "Inserts text and auto-indents the line on which the cursor sits if any of the text contains 'layout punctuation' such as ;:{}()[]# and new lines.", 145, "c:\\4coder\\custom\\4coder_auto_indent.cpp", 39, 440 },
 { PROC_LINKS(write_text_input, 0), false, "write_text_input", 16, "Inserts whatever text was used to trigger this command.", 55, "c:\\4coder\\custom\\4coder_base_commands.cpp", 41, 59 },
@@ -1045,14 +1053,18 @@ static i32 fcoder_metacmd_ID_view_buffer_other_panel = 330;
 static i32 fcoder_metacmd_ID_view_jump_list_with_lister = 331;
 static i32 fcoder_metacmd_ID_word_complete = 332;
 static i32 fcoder_metacmd_ID_word_complete_drop_down = 333;
-static i32 fcoder_metacmd_ID_write_block = 334;
-static i32 fcoder_metacmd_ID_write_curly = 335;
-static i32 fcoder_metacmd_ID_write_hack = 336;
-static i32 fcoder_metacmd_ID_write_note = 337;
-static i32 fcoder_metacmd_ID_write_space = 338;
-static i32 fcoder_metacmd_ID_write_text_and_auto_indent = 339;
-static i32 fcoder_metacmd_ID_write_text_input = 340;
-static i32 fcoder_metacmd_ID_write_todo = 341;
-static i32 fcoder_metacmd_ID_write_underscore = 342;
-static i32 fcoder_metacmd_ID_write_zero_struct = 343;
+static i32 fcoder_metacmd_ID_write_array_brackets = 334;
+static i32 fcoder_metacmd_ID_write_block = 335;
+static i32 fcoder_metacmd_ID_write_curly = 336;
+static i32 fcoder_metacmd_ID_write_double_quote = 337;
+static i32 fcoder_metacmd_ID_write_hack = 338;
+static i32 fcoder_metacmd_ID_write_note = 339;
+static i32 fcoder_metacmd_ID_write_parentheses = 340;
+static i32 fcoder_metacmd_ID_write_single_quote = 341;
+static i32 fcoder_metacmd_ID_write_space = 342;
+static i32 fcoder_metacmd_ID_write_text_and_auto_indent = 343;
+static i32 fcoder_metacmd_ID_write_text_input = 344;
+static i32 fcoder_metacmd_ID_write_todo = 345;
+static i32 fcoder_metacmd_ID_write_underscore = 346;
+static i32 fcoder_metacmd_ID_write_zero_struct = 347;
 #endif

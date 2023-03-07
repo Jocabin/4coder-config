@@ -6,20 +6,52 @@ struct Command_Map_ID_Pair
 };
 static Command_Map_ID_Pair GlobalCommandMapReroute[4] = {};
 
+// custom for jocabin
+CUSTOM_COMMAND_SIG(write_curly)
+CUSTOM_DOC("Write both curlys")
+{
+    View_ID view = get_active_view( app, 0 );
+    write_string( app, string_u8_litexpr( "{\n\n}" ) );
+    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 2 ) );
+}
+
+CUSTOM_COMMAND_SIG(write_parentheses)
+CUSTOM_DOC("Write both parentheses")
+{
+    View_ID view = get_active_view( app, 0 );
+    write_string( app, string_u8_litexpr( "()" ) );
+    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 1 ) );
+}
+
+CUSTOM_COMMAND_SIG(write_single_quote)
+CUSTOM_DOC("Write both singles quotes")
+{
+    View_ID view = get_active_view( app, 0 );
+    write_string( app, string_u8_litexpr( "''" ) );
+    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 1 ) );
+}
+
+CUSTOM_COMMAND_SIG(write_double_quote)
+CUSTOM_DOC("Write both doubles quotes")
+{
+    View_ID view = get_active_view( app, 0 );
+    write_string( app, string_u8_litexpr( "\"\"" ) );
+    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 1 ) );
+}
+
+CUSTOM_COMMAND_SIG(write_array_brackets)
+CUSTOM_DOC("Write both doubles array brackets")
+{
+    View_ID view = get_active_view( app, 0 );
+    write_string( app, string_u8_litexpr( "[]" ) );
+    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 1 ) );
+}
+
 CUSTOM_COMMAND_SIG(switch_to_keybinding_0)
 CUSTOM_DOC("Switch the keybindings to mode 0.")
 {
 	GlobalKeybindingMode = KeyBindingMode_0;
 }
-
-CUSTOM_COMMAND_SIG( write_curly )
-CUSTOM_DOC("Write both curlys")
-{
-    View_ID view = get_active_view( app, 0 );
-    write_string( app, string_u8_litexpr( "{}" ) );
-    view_set_cursor( app, view, seek_pos( view_get_cursor_pos( app, view ) - 1 ) );
-}
-
 
 CUSTOM_COMMAND_SIG(switch_to_keybinding_1)
 CUSTOM_DOC("Switch the keybindings to mode 1.")
